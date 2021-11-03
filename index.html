@@ -34,15 +34,17 @@
     <!-- Your HTML here -->
 
     <div class="container">
-      <h1 class="my-5 text-center">Word finder</h1>
+      <h1 class="my-3 text-center bg-dark text-white p-3 rounded">
+        WORD FINDER
+      </h1>
 
       <input
         type="text"
         name="Enter word to find"
         id="filterInput"
-        class="form-control"
+        class="form-control my-3"
+        placeholder="Enter word here to search"
       />
-      <button class="btn btn-primary my-2 btn-block">Search</button>
 
       <ul id="myList" class="list-group list-group-flush"></ul>
     </div>
@@ -71,12 +73,16 @@
     // has finished loading in the browser.
     $(document).ready(function () {
       var dict = new Dictionary(words);
-      console.log(dict);
-      console.log(words.length);
+
       for (let index = 0; index < 1000; index++) {
+        //Creating an li elemtent and adding it to list
         let myElm = document.createElement("li");
+        //setting adding word as a text to element
         myElm.innerText = words[index];
+        //adding class for styling
         myElm.classList.add("list-group-item");
+     
+        //appending it to list
         document.getElementById("myList").appendChild(myElm);
       }
     });
@@ -90,19 +96,23 @@
     // Adding eventListener
     filterInput.addEventListener("keyup", filterWords);
 
+    //This function is used to filter the words
     function filterWords() {
       let filterValue = document
         .getElementById("filterInput")
         .value.toUpperCase();
 
+      //Targeting parent element of list
       let ul = document.getElementById("myList");
 
+      //Selecting all li elements which are in list
       let li = ul.querySelectorAll("li");
 
+      //iterating over the elements and cheking wahether typed word has match or not
       for (let index = 0; index < li.length; index++) {
         const element = li[index];
 
-        // console.log(element.innerHTML.toUpperCase());
+        //Displaying only those words which matches with typed word
         if (element.innerText.toUpperCase().indexOf(filterValue) > -1) {
           element.style.display = "";
         } else {
